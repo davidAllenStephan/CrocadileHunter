@@ -12,7 +12,6 @@ class Enemy {
         this.currentRunIndex = 1
         this.distanceToPlayer = 0
     }
-
     GetDistanceToPlayer(playerX) {
         let distance = null
         if (this.isDirectionLeft) {
@@ -22,7 +21,6 @@ class Enemy {
         }
         this.distanceToPlayer = distance
     }
-
     GetImageToUseBasedOnState() {
         if (this.distanceToPlayer < 150) {
             this.height = 54
@@ -38,7 +36,6 @@ class Enemy {
             return (this.runCycle[this.currentRunIndex])
         }
     }
-
     SpeedUp() {
         if (this.distanceToPlayer < 150) {
             if (this.isDirectionLeft) {
@@ -56,7 +53,6 @@ class Enemy {
             }
         }
     }
-
     Show() {
         let imageToUse = this.GetImageToUseBasedOnState();
         if (!this.isHit) {
@@ -70,7 +66,6 @@ class Enemy {
             }
         }
     }
-
     Update() {
         if (this.currentPos.x > (940 - this.width)) {
             this.isDirectionLeft = true
@@ -87,6 +82,5 @@ class Enemy {
             this.SpeedUp()
         }
         this.currentPos.add(this.currentSpeed.x, 0)
-
     }
 }
