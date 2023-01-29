@@ -18,8 +18,8 @@ class Player {
         this.isDirectionUp = false
         this.isDirectionDown = false
 
-        this.height = 72
-        this.width = 84
+        this.height = 72 / 2
+        this.width = 84 / 2
         this.isShooting = false
         this.runCycle = [run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run1Image, run2Image, run2Image, run2Image, run2Image, run2Image, run2Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run3Image, run2Image, run2Image, run2Image, run2Image, run2Image, run2Image]
         this.currentRunIndex = 1

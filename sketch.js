@@ -27,6 +27,8 @@ let crocSnap3Image = null
 
 let isGameWon = false
 
+let creatingLines = true
+
 let currentLines = [
     {
         x1: 0,
@@ -51,6 +53,18 @@ let currentLines = [
         y1: 0,
         x2: width,
         y2: 0
+    },
+    {
+        x1: 100,
+        y1: 180,
+        x2: 420,
+        y2: 180
+    },
+    {
+        x1: 100,
+        y1: 80,
+        x2: 100,
+        y2: 180
     }
 ]
 
@@ -96,6 +110,9 @@ function draw() {
     currentLines.map((l) => {
         line(l.x1, l.y1, l.x2, l.y2)
     })
+
+    if (creatingLines)
+        drawMousePosition();
 }
 
 function keyPressed() {
@@ -130,8 +147,53 @@ function keyReleased() {
             player.isDownPressed = false
             break;
     }
+    switch (key) {
+        case 'R':
+            if (creatingLines) {
+                mousePos1 = null;
+                mousePos2 = null;
+            }
+            break;
+    }
 }
 
+let mousePos1 = null;
+let mousePos2 = null;
+
+function drawMousePosition() {
+    let snappedX = mouseX - mouseX % 20;
+    let snappedY = mouseY - mouseY % 20;
+    push();
+
+
+    fill(255, 0, 0)
+    noStroke();
+    ellipse(snappedX, snappedY, 5);
+
+    if (mousePos1 != null) {
+        stroke(255, 0, 0)
+        strokeWeight(5)
+        line(mousePos1.x, mousePos1.y, snappedX, snappedY)
+    }
+
+    pop();
+}
+
+
+function mouseClicked() {
+    if (creatingLines) {
+        let snappedX = mouseX - mouseX % 20;
+        let snappedY = mouseY - mouseY % 20;
+        if (mousePos1 == null) {
+            mousePos1 = createVector(snappedX, snappedY);
+        } else {
+            mousePos2 = createVector(snappedX, snappedY);
+            print('tempLevel.lines.push(new Line(' + mousePos1.x + ',' + mousePos1.y + ',' + mousePos2.x + ',' + mousePos2.y + '));');
+            mousePos1 = null;
+            mousePos2 = null;
+        }
+    }
+}
 
 
 
